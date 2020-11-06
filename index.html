@@ -1,0 +1,362 @@
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Tulisno">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;display=swap"
+    rel="stylesheet">
+
+  <title>Tulisno | Web Auto Nulis Tugas</title>
+  <!--
+
+-->
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+  <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+
+  <link rel="stylesheet" href="assets/css/templatemo-lava.css">
+
+  <link rel="stylesheet" href="assets/css/owl-carousel.css">
+
+  <style>
+    @font-face {
+      font-family: HandwritingCR-2;
+      src: url(/fonts/HandwritingCR-2.ttf);
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky background-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              Tulisno
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="#welcome" class="menu-item">Home</a></li>
+
+              <li class="scroll-to-section"><a href="#Tulisno" class="menu-item active">Tulisno</a>
+              </li>
+
+              <li class="scroll-to-section"><a href="#contact-us" class="menu-item">Contact Us</a></li>
+            </ul>
+            <a class="menu-trigger">
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+
+  <!-- ***** Welcome Area Start ***** -->
+  <div class="welcome-area" id="welcome">
+
+    <!-- ***** Header Text Start ***** -->
+    <div class="header-text">
+      <div class="container">
+        <div class="row">
+          <div class="left-text col-lg-6 col-md-12 col-sm-12 col-xs-12"
+            data-scroll-reveal="enter left move 30px over 0.6s after 0.4s" data-scroll-reveal-id="1"
+            data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
+            <h1>Tulisno <em>.</em></h1>
+            <p>Mager mau nulis offline? .
+              Mending pakai tulisno.
+              Tulisno merupakan website nulis otomatis bagi kalian yg mager nulis dikertas</p>
+            <a href="#about" class="main-button-slider">Start</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Header Text End ***** -->
+  </div>
+  <!-- ***** Welcome Area End ***** -->
+
+  <div class="left-image-decor"></div>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+  <script>
+    let bg, font, margin, gap, fontsize = 16;
+    let txtDate = '',
+      txtName = '',
+      txtContent = '';
+
+    let fonts = [{
+        'index': 0,
+        'name': 'HandwritingCR 2',
+        'file': 'HandwritingCR-2.ttf'
+      },
+      {
+        'index': 1,
+        'name': 'Gloria Hallelujah',
+        'file': 'GloriaHallelujah-Regular.ttf'
+      },
+      {
+        'index': 2,
+        'name': 'Heart Warming by Situjuh',
+        'file': 'Heart Warming Font by Situjuh.otf'
+      },
+      {
+        'index': 3,
+        'name': 'Shadows Into Light',
+        'file': 'ShadowsIntoLight-Regular.ttf'
+      }
+    ];
+
+    let getFontIndex = () => {
+      let fontIndex = localStorage.getItem('fontIndex');
+      if (fontIndex) {
+        return fonts[fontIndex];
+      }
+      return fonts[0];
+    }
+
+    // canvas
+    function preload() {
+
+    }
+
+    function setup() {
+      // ukuran asli gambar 300x441
+      createCanvas(300 * 2, 447 * 2);
+      bg = loadImage('/img/folio.jpg');
+      font = loadFont('/fonts/' + getFontIndex().file);
+
+      textFont(font);
+      textSize(fontsize);
+    }
+
+    function draw() {
+      // fix_dpi();
+      background(bg);
+      margin = 20;
+      fill(0, 0, 0, 200);
+      translate(margin - 8, margin * 4);
+      text(txtName, 0, 0);
+      text(txtDate, 450, 0);
+      translate(0, margin + 7);
+
+      text(txtContent, 0, 0, 580 /*, 800 */ );
+    }
+
+    document.addEventListener('DOMContentLoaded', (e) => {
+      let fontSelectEl = document.getElementById('font');
+      let fontSelectOptionTemplate = (index, name) => {
+        let _selected = (index == getFontIndex().index) ? 'selected' : '';
+        return `<option value="${index}" ${_selected}>${name}</option>`;
+      }
+      let _temp = '';
+      fonts.forEach((font, index) => {
+        _temp += fontSelectOptionTemplate(index, font.name);
+      });
+      fontSelectEl.innerHTML = _temp;
+    });
+  </script>
+  <script>
+    function downloadCanvas(c, filename) {
+      /// create an "off-screen" anchor tag
+      var lnk = document.createElement('a'),
+        e;
+      /// the key here is to set the download attribute of the a tag
+      lnk.download = filename;
+      /// convert canvas content to data-uri for link. When download
+      /// attribute is set the content pointed to by link will be
+      /// pushed as "download" in HTML5 capable browsers
+      lnk.href = c.toDataURL();
+      /// create a "fake" click-event to trigger the download
+      if (document.createEvent) {
+        e = document.createEvent("MouseEvents");
+        e.initMouseEvent("click", true, true, window,
+          0, 0, 0, 0, 0, false, false, false,
+          false, 0, null);
+        lnk.dispatchEvent(e);
+      } else if (lnk.fireEvent) {
+        lnk.fireEvent("onclick");
+      }
+    }
+    function fix_dpi() {
+      let canvas = document.getElementById('defaultCanvas0');
+      let dpi = window.devicePixelRatio;
+      let style = {
+        height() {
+          return +getComputedStyle(canvas).getPropertyValue('height').slice(0, -2);
+        },
+        width() {
+          return +getComputedStyle(canvas).getPropertyValue('width').slice(0, -2);
+        }
+      }
+      canvas.setAttribute('width', style.width() * dpi);
+      canvas.setAttribute('height', style.height() * dpi);
+    }
+  </script>
+  <!-- ***** Features Big Item Start ***** -->
+  <section class="section" id="Tulisno">
+    <div class="container">
+      <div class="row">
+
+        <!-- ***** Contact Form Start ***** -->
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <div class="contact-form">
+            <div class="card-body">
+              <div class="form-group">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="font">Select Font:</label>
+                  <select class="form-control" id="font"
+                    onchange="localStorage.setItem('fontIndex', this.value);setup()"></select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="font">Select Book:</label>
+                  <select class="form-control" id="book"
+                    onchange="localStorage.setItem('bookIndex', this.value);setup()"></select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="date">Hari/Tanggal</label>
+                  <input type="text" class="form-control" id="date" oninput="txtDate = this.value">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Nama</label>
+                  <input type="text" class="form-control" id="name" oninput="txtName = this.value">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" id="content" rows="10" oninput="txtContent = this.value"></textarea>
+              </div>
+
+
+            </div>
+            <div class="form-group">
+
+              <button class="main-button"
+                onclick="downloadCanvas(document.getElementById('defaultCanvas0'), 'hasil.png')">Download</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12">
+
+
+          <main class="paper-container"></main>
+
+          
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+  <!-- ***** Features Big Item End ***** -->
+
+  <div class="right-image-decor"></div>
+
+
+  <!-- ***** Footer Start ***** -->
+  <footer id="contact-us">
+    <div class="container">
+      <div class="footer-content">
+        <div class="row">
+          <!-- ***** Contact Form Start ***** -->
+          <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+
+
+                  <div class="col-md-6 col-sm-12">
+                    <fieldset>
+                      <input name="name" type="text" id="name" placeholder="Full Name" required=""
+                        style="background-color: rgba(250,250,250,0.3);">
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <fieldset>
+                      <input name="email" type="text" id="email" placeholder="E-Mail Address" required=""
+                        style="background-color: rgba(250,250,250,0.3);">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <textarea name="message" rows="6" id="message" placeholder="Your Message" required=""
+                        style="background-color: rgba(250,250,250,0.3);"></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="main-button">Send Message
+                        Now</button>
+                    </fieldset>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+          <!-- ***** Contact Form End ***** -->
+          <div class="right-content col-lg-6 col-md-12 col-sm-12">
+            <h2>More About Tulisno</h2>
+            <p>Mager mau nulis offline? . Mending pakai tulisno. Tulisno merupakan website nulis otomatis bagi kalian yg mager nulis dikertas
+              <br><br>If you need this contact form to send email to your inbox, you may follow our <a rel="nofollow"
+                href="https://www.facebook.com/wilsen.orochi.9" target="_parent">contact</a> page
+              for more detail.</p>
+            <ul class="social">
+              <li><a href="https://www.facebook.com/wilsen.orochi.9"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa fa-rss"></i></a></li>
+              <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="sub-footer">
+            <p class="love">Made with ❤ hisyam.ardiansyah_</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="assets/js/popper.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <!-- Plugins -->
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/scrollreveal.min.js"></script>
+  <script src="assets/js/waypoints.min.js"></script>
+  <script src="assets/js/jquery.counterup.min.js"></script>
+  <script src="assets/js/imgfix.min.js"></script>
+
+  <!-- Global Init -->
+  <script src="assets/js/custom.js"></script>
+
+
+
+</body>
+
+</html>
