@@ -6,4 +6,4 @@
 </p>
 <br>
 
-[![Stisla Preview](https://i.imgur.com/GQh7FDe.png)]
+[![Tulisno Preview](https://i.imgur.com/GQh7FDe.png)]
