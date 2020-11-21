@@ -7,4 +7,4 @@
 Demo: http://tulisno.vercel.app/
 <br>
 
-[![Tulisno Preview](https://i.imgur.com/GQh7FDe.png)]
+![Tulisno Preview](https://i.imgur.com/2XU2qYo.png)
