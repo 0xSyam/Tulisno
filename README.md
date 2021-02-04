@@ -2,7 +2,7 @@
 <h1 align="center">Tulisno</h1>
 
 <p>
- Tulisno is a website for generating writings into books.
+ Tulisno is a website for generating text writings into writings.
 </p>
 Demo: http://tulisno.vercel.app/
 <br>
